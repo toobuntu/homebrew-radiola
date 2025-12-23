@@ -27,4 +27,23 @@ cask "radiola@8" do
     "~/Library/HTTPStorages/com.github.SokoloffA.Radiola.binarycookies",
     "~/Library/Preferences/com.github.SokoloffA.Radiola.plist",
   ]
+
+  caveats <<~EOS
+  Radiola 8 is the last release that uses Apple’s AVPlayer framework
+  for audio playback. To keep AVPlayer, do not allow the app to update.
+
+  Radiola checks for updates using a hardcoded Sparkle appcast feed, and
+  will offer to update unless that feed is blocked. Sparkle-related
+  Info.plist defaults (such as SUFeedURL) do not disable these checks.
+
+  To make it easier to stay on Radiola 8, block both IPv4 and IPv6 access
+  to `sokoloffa.github.io` using your preferred firewall or DNS method.
+
+  `/etc/hosts` entries may not stop the update check if DNS caching
+  interferes or if VPNs or other network tools bypass the hosts file.
+
+  Example `/etc/hosts` entries (optional):
+    0.0.0.0 sokoloffa.github.io  # IPv4 blackhole
+    ::1     sokoloffa.github.io  # IPv6 loopback
+  EOS
 end
