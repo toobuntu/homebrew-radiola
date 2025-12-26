@@ -12,9 +12,76 @@ cask "radiola@8" do
   end
 
   auto_updates true
+  conflicts_with cask: "radiola"
   depends_on macos: ">= :big_sur"
 
   app "Radiola.app"
+
+  # Legacy version; disable Sparkle updates
+  postflight do
+    prefs = File.expand_path("~/Library/Preferences/com.github.SokoloffA.Radiola.plist")
+    feed_url = "https://raw.githubusercontent.com/toobuntu/homebrew-radiola/main/feed.xml"
+
+    ohai "Preparing Radiola 8 to suppress update checks..."
+
+    system_command "/usr/bin/pkill",
+                   args:         ["-f", "Radiola.app/Contents/MacOS/Radiola"],
+                   must_succeed: false
+
+    # Disable Sparkle Updater's automatic checks
+    set_result = system_command "/usr/libexec/PlistBuddy",
+                                args:         ["-c", "Set :SUEnableAutomaticChecks false", prefs],
+                                must_succeed: false
+
+    unless set_result.success?
+      add_result = system_command "/usr/libexec/PlistBuddy",
+                                  args:         ["-c", "Add :SUEnableAutomaticChecks bool false", prefs]
+      if !add_result.success? && add_result.stderr.exclude?("Entry Already Exists")
+        opoo "Failed to write SUEnableAutomaticChecks to #{prefs}: #{add_result.stderr}"
+      end
+    end
+
+    # Point Sparkle to a custom feed
+    set_result = system_command "/usr/libexec/PlistBuddy",
+                                args:         ["-c", "Set :SUFeedURL #{feed_url}", prefs],
+                                must_succeed: false
+
+    unless set_result.success?
+      add_result = system_command "/usr/libexec/PlistBuddy",
+                                  args:         ["-c", "Add :SUFeedURL string #{feed_url}", prefs]
+      if !add_result.success? && add_result.stderr.exclude?("Entry Already Exists")
+        opoo "Failed to write SUFeedURL to #{prefs}: #{add_result.stderr}"
+      end
+    end
+  end
+
+  uninstall_postflight do
+    prefs = File.expand_path("~/Library/Preferences/com.github.SokoloffA.Radiola.plist")
+
+    return unless File.exist?(prefs)
+
+    ohai "Unsuppressing Radiola updates..."
+
+    system_command "/usr/bin/pkill",
+                   args:         ["-f", "Radiola.app/Contents/MacOS/Radiola"],
+                   must_succeed: false
+
+    del_result = system_command "/usr/libexec/PlistBuddy",
+                                args:         ["-c", "Delete :SUEnableAutomaticChecks", prefs],
+                                must_succeed: false
+
+    if !del_result.success? && del_result.stderr.exclude?("Does Not Exist")
+      opoo "Failed to delete SUEnableAutomaticChecks: #{del_result.stderr}"
+    end
+
+    del_result = system_command "/usr/libexec/PlistBuddy",
+                                args:         ["-c", "Delete :SUFeedURL", prefs],
+                                must_succeed: false
+
+    if !del_result.success? && del_result.stderr.exclude?("Does Not Exist")
+      opoo "Failed to delete SUFeedURL: #{del_result.stderr}"
+    end
+  end
 
   uninstall quit: "com.github.SokoloffA.Radiola"
 
@@ -29,21 +96,15 @@ cask "radiola@8" do
   ]
 
   caveats <<~EOS
-  Radiola 8 is the last release that uses Apple’s AVPlayer framework
-  for audio playback. To keep AVPlayer, do not allow the app to update.
+    This legacy release of Radiola uses Apple’s AVPlayer. Updating the
+    app will switch it to a different audio engine. This cask automatically
+    configures Radiola so that update checks do not offer newer versions.
 
-  Radiola checks for updates using a hardcoded Sparkle appcast feed, and
-  will offer to update unless that feed is blocked. Sparkle-related
-  Info.plist defaults (such as SUFeedURL) do not disable these checks.
+    Radiola also includes a setting to disable automatic update checks.
+    As an optional fail‑safe, you may block IPv4 and IPv6 access to
+    `sokoloffa.github.io` using a firewall or in /etc/hosts.
 
-  To make it easier to stay on Radiola 8, block both IPv4 and IPv6 access
-  to `sokoloffa.github.io` using your preferred firewall or DNS method.
-
-  `/etc/hosts` entries may not stop the update check if DNS caching
-  interferes or if VPNs or other network tools bypass the hosts file.
-
-  Example `/etc/hosts` entries (optional):
-    0.0.0.0 sokoloffa.github.io  # IPv4 blackhole
-    ::1     sokoloffa.github.io  # IPv6 loopback
+    For details, see:
+      https://github.com/toobuntu/homebrew-radiola/blob/main/NOTES.md
   EOS
 end
