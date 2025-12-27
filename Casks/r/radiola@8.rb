@@ -58,7 +58,7 @@ cask "radiola@8" do
   uninstall_postflight do
     prefs = File.expand_path("~/Library/Preferences/com.github.SokoloffA.Radiola.plist")
 
-    return unless File.exist?(prefs)
+    next unless File.exist?(prefs)
 
     ohai "Unsuppressing Radiola updates..."
 
