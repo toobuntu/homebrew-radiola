@@ -31,7 +31,8 @@ cask "radiola@8" do
     # Disable Sparkle Updater's automatic checks
     set_result = system_command "/usr/libexec/PlistBuddy",
                                 args:         ["-c", "Set :SUEnableAutomaticChecks false", prefs],
-                                must_succeed: false
+                                must_succeed: false,
+                                print_stderr: false
 
     unless set_result.success?
       add_result = system_command "/usr/libexec/PlistBuddy",
@@ -44,7 +45,8 @@ cask "radiola@8" do
     # Point Sparkle to a custom feed
     set_result = system_command "/usr/libexec/PlistBuddy",
                                 args:         ["-c", "Set :SUFeedURL #{feed_url}", prefs],
-                                must_succeed: false
+                                must_succeed: false,
+                                print_stderr: false
 
     unless set_result.success?
       add_result = system_command "/usr/libexec/PlistBuddy",
@@ -63,7 +65,7 @@ cask "radiola@8" do
     puts <<~MSG
       ==> Unsuppressing Radiola updates in:
         ~/Library/Preferences/com.github.SokoloffA.Radiola.plist
-   MSG
+    MSG
 
     system_command "/usr/bin/pkill",
                    args:         ["-f", "Radiola.app/Contents/MacOS/Radiola"],
