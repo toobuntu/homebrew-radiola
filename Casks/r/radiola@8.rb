@@ -60,7 +60,10 @@ cask "radiola@8" do
 
     next unless File.exist?(prefs)
 
-    ohai "Unsuppressing Radiola updates..."
+    puts <<~MSG
+      ==> Unsuppressing Radiola updates in:
+        ~/Library/Preferences/com.github.SokoloffA.Radiola.plist
+   MSG
 
     system_command "/usr/bin/pkill",
                    args:         ["-f", "Radiola.app/Contents/MacOS/Radiola"],
