@@ -76,7 +76,7 @@ cask "radiola@8" do
                                 must_succeed: false
 
     if !del_result.success? && del_result.stderr.exclude?("Does Not Exist")
-      opoo "Failed to delete SUEnableAutomaticChecks: #{del_result.stderr}"
+      $stderr.puts "==> Failed to delete SUEnableAutomaticChecks: #{del_result.stderr}"
     end
 
     del_result = system_command "/usr/libexec/PlistBuddy",
@@ -84,7 +84,7 @@ cask "radiola@8" do
                                 must_succeed: false
 
     if !del_result.success? && del_result.stderr.exclude?("Does Not Exist")
-      opoo "Failed to delete SUFeedURL: #{del_result.stderr}"
+      $stderr.puts "==> Failed to delete SUFeedURL: #{del_result.stderr}"
     end
   end
 
