@@ -4,7 +4,14 @@ SPDX-FileCopyrightText: Copyright 2025 Todd Schulman
 SPDX-License-Identifier: GPL-3.0-or-later
 -->
 
-[![radiola](docs/assets/signal.svg)](https://github.com/SokoloffA/radiola)
+<a href="https://github.com/SokoloffA/radiola">
+  <img src="docs/assets/signal.svg" width="128" alt="Radiola logo">
+</a>
+
+<!--
+[![radiola](docs/assets/radiola.png)](https://github.com/SokoloffA/radiola)
+-->
+
 # Radiola Legacy Tap
 
 This tap provides the legacy **Radiola 8** release, the final version that used macOS’ built‑in **AVPlayer** audio engine. Newer Radiola versions switched to an FFmpeg-based engine to support more audio formats and address issues with certain streams.
