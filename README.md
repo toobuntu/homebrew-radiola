@@ -1,17 +1,17 @@
-[![radiola](radiola.png)](https://github.com/SokoloffA/radiola)
+[![radiola](docs/assets/radiola.png)](https://github.com/SokoloffA/radiola)
 # Radiola Legacy Tap
 
-This tap provides the last version of Radiola (version 8) that used macOS’s built‑in AVPlayer audio engine. Upstream has since migrated to FFmpeg to address issues some users experienced with certain streams.
+This tap provides the legacy **Radiola 8** release, the final version that used macOS’ built‑in **AVPlayer** audio engine. Newer Radiola versions switched to an FFmpeg-based engine to support more audio formats and address issues with certain streams.
 
-Radiola 8 remains useful for users whose needs are met by simple MP3/AAC radio streams and who prefer AVPlayer’s lower memory usage (~2 MiB) compared to FFmpeg (~27 MiB).
+Radiola 8 remains lightweight and efficient—using roughly **2 MiB** of memory compared to **~27 MiB** for the FFmpeg-based engine. If the AVPlayer-based version worked well for your needs, you can install it from this tap. It often performed reliably for simple MP3/AAC radio streams.
 
-This tap provides only Radiola 8, the final release using AVPlayer.  If you want to follow ongoing upstream development, install Radiola from its official Homebrew cask instead.
+This tap installs Radiola 8 and prevents it from auto-updating to the newer audio engine. If you want to follow ongoing upstream development, install Radiola from its official Homebrew cask instead.
 
 You can support the project by starring or watching the upstream repository: https://github.com/SokoloffA/radiola
 
-## Installation
+## Install
 
-First, make sure you have installed [`Homebrew`](https://brew.sh) if you haven't yet.
+First, make sure you have installed [Homebrew](https://brew.sh) if you haven't yet.
 
 Install with a single command:
 
@@ -24,7 +24,7 @@ Or, if you prefer step-by-step:
 # Add this tap (required only once)
 brew tap toobuntu/radiola
 
-# Install Radiola v8 from the tap
+# Install Radiola 8 from the tap
 brew install --cask radiola@8
 ```
 
@@ -33,10 +33,30 @@ brew install --cask radiola@8
 Run one of the following:
 
 ```sh
-# To uninstall and keep your configuration files
+# To uninstall and keep your settings
 brew uninstall --cask radiola@8
 
-# To uninstall and delete your configuration files
+# To uninstall and remove all settings and caches
 brew uninstall --zap --cask radiola@8
 ```
 
+## Preventing updates
+
+The cask automatically:
+
+- disables automatic update checks
+- points Sparkle (in-app updater) to a custom update feed pinned to Radiola 8
+
+You can also disable updates manually:
+
+```sh
+defaults write ~/Library/Preferences/com.github.SokoloffA.Radiola.plist SUEnableAutomaticChecks -bool false
+defaults write ~/Library/Preferences/com.github.SokoloffA.Radiola.plist SUFeedURL -string "https://raw.githubusercontent.com/toobuntu/homebrew-radiola/main/feed.xml"
+```
+
+## Technical notes
+
+See [NOTES.md](docs/NOTES.md) for details on:
+
+- Sparkle updater behavior
+- Further blocking the update server via DNS as a fallback
