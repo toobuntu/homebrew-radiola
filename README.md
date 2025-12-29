@@ -18,7 +18,7 @@ This tap provides the legacy **Radiola 8** release, the final version that used 
 
 Radiola 8 remains lightweight and efficient—using roughly **2 MiB** of memory compared to **~27 MiB** for the FFmpeg-based engine. If the AVPlayer-based version worked well for your needs, you can install it from this tap. It often performed reliably for simple MP3/AAC radio streams.
 
-This tap installs Radiola 8 and prevents it from auto-updating to the newer audio engine. If you want to follow ongoing upstream development, install Radiola from its official Homebrew cask instead.
+Installing Radiola 8 from this tap also prevents it from auto-updating to the newer audio engine. If you want to follow ongoing upstream development, install Radiola from its official Homebrew cask instead.
 
 You can support the project by starring or watching the upstream repository: https://github.com/SokoloffA/radiola
 
@@ -74,6 +74,6 @@ See [NOTES.md](docs/NOTES.md) for details on:
 - Sparkle updater behavior
 - Further blocking the update server via DNS as a fallback
 
-## Asset attribution
+## Acknowledgments
 
 The Radiola logos in this repository (`docs/assets/radiola.png` and `docs/assets/signal.svg`) are copyright Alexander Sokolov, the original author of Radiola, and are available under the MIT license. See the corresponding `.license` files in `docs/assets` for details.
