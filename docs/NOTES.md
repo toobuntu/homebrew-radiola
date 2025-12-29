@@ -1,12 +1,5 @@
 <!--
-  Radiola 8 is the last release to use Apple’s AVPlayer framework
-  for audio playback. To keep AVPlayer, do not allow the app to update.
-
-  Radiola checks for updates using a hardcoded Sparkle appcast feed, and
-  will offer to update unless that feed is blocked.
-
-  To make it easier to stay on Radiola 8, block both IPv4 and IPv6 access
-  to `sokoloffa.github.io` using your preferred firewall or DNS method.
+last checked: 28 Dec 2025
 -->
 
 # Radiola 8 (Legacy) – Technical Notes
@@ -17,14 +10,16 @@ Radiola 8 remains useful for users whose needs are met by simple MP3/AAC radio s
 
 ## Sparkle Updater Behavior
 
-Radiola uses Sparkle for updates, which checks a hardcoded appcast feed. To prevent Radiola 8 from offering newer versions, the cask:
+Radiola uses the Sparkle framework for update checks. Sparkle reads its configuration, including the appcast URL, from the Radiola app bundle’s `Info.plist` and honors overrides set in user defaults. During both automatic and manual checks, it downloads the appcast feed to determine whether newer versions are available.
 
-- disables automatic update checks (`SUEnableAutomaticChecks`)
-- overrides the feed URL (`SUFeedURL`)
+To prevent Radiola 8 from offering updates beyond the version provided by this tap, the cask writes the following user defaults to `~/Library/Preferences/com.github.SokoloffA.Radiola.plist`:
+
+- `SUEnableAutomaticChecks` — disables automatic update checks
+- `SUFeedURL` — sets a tap-controlled appcast URL
 
 These keys are removed during uninstall.
 
-This approach avoids accidental upgrades while keeping Radiola functional.
+This prevents accidental upgrades while keeping Radiola functional.
 
 ## Blocking the Update Feed
 

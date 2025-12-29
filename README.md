@@ -42,7 +42,7 @@ brew uninstall --zap --cask radiola@8
 
 ## Preventing updates
 
-The cask automatically:
+So Radiola 8 does not prompt for newer versions, the cask automatically:
 
 - disables automatic update checks
 - points Sparkle (in-app updater) to a custom update feed pinned to Radiola 8

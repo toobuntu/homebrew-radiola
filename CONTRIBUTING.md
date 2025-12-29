@@ -34,11 +34,22 @@ If you always uninstall before testing and the tap clone is clean, the reset scr
 
 ## Local testing tap
 
+<!-- Ref https://github.com/orgs/Homebrew/discussions/4864 -->
+
 It is a good idea to iterate without touching this tap by copying your changes to a testing tap on your local filesystem. Install/uninstall from that tap until you are ready to push changes here. Always uninstall Radiola before starting a new test cycle.
 
 ```sh
 brew tap-new <user>/testing
-/bin/rm -rf .github
+cd "$(brew --repo <user>/testing)"
+/bin/rm -rf \
+  .github \
+  Formula
+/bin/mkdir Casks
+sed -i '' \
+  -e 's/formulae/casks/g' \
+  -e 's/formula/cask/g' \
+  -e 's/brew "<cask>"/cask "<cask>"/g' \
+  README.md
 ```
 
 ## Style checks
