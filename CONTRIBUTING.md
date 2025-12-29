@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: Copyright 2025 Todd Schulman
+
+SPDX-License-Identifier: GPL-3.0-or-later
+-->
+
 # Contributing
 
 This tap contains the legacy `radiola@8` cask. Because Homebrew maintains its own clone of this tap and uses metadata snapshots during uninstall, testing flight‑block changes requires a clean environment.

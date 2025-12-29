@@ -1,4 +1,10 @@
 <!--
+SPDX-FileCopyrightText: Copyright 2025 Todd Schulman
+
+SPDX-License-Identifier: GPL-3.0-or-later
+-->
+
+<!--
 last checked: 28 Dec 2025
 -->
 

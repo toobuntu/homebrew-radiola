@@ -1,4 +1,11 @@
 <?xml version="1.0"?>
+
+<!--
+SPDX-FileCopyrightText: Copyright 2025 Todd Schulman
+
+SPDX-License-Identifier: GPL-3.0-or-later
+-->
+
 <rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
   <channel>
     <title/>

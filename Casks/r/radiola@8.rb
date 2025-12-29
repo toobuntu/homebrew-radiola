@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: Copyright 2025 Todd Schulman
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 cask "radiola@8" do
   version "8.1.1"
   sha256 "22d681c31fe172ec7d2e493446f457f70cbd3026eed224527a45a27df632d394"

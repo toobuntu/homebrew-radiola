@@ -1,4 +1,9 @@
 #!/bin/ksh
+
+# SPDX-FileCopyrightText: Copyright 2025 Todd Schulman
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 set -euo pipefail
 
 # reset-tap.sh — Reset the Homebrew tap clone for clean testing.

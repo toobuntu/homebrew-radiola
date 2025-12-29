@@ -1,4 +1,10 @@
-[![radiola](docs/assets/radiola.png)](https://github.com/SokoloffA/radiola)
+<!--
+SPDX-FileCopyrightText: Copyright 2025 Todd Schulman
+
+SPDX-License-Identifier: GPL-3.0-or-later
+-->
+
+[![radiola](docs/assets/signal.svg)](https://github.com/SokoloffA/radiola)
 # Radiola Legacy Tap
 
 This tap provides the legacy **Radiola 8** release, the final version that used macOS’ built‑in **AVPlayer** audio engine. Newer Radiola versions switched to an FFmpeg-based engine to support more audio formats and address issues with certain streams.
@@ -60,3 +66,7 @@ See [NOTES.md](docs/NOTES.md) for details on:
 
 - Sparkle updater behavior
 - Further blocking the update server via DNS as a fallback
+
+## Asset attribution
+
+The Radiola logos in this repository (`docs/assets/radiola.png` and `docs/assets/signal.svg`) are copyright Alexander Sokolov, the original author of Radiola, and are available under the MIT license. See the corresponding `.license` files in `docs/assets` for details.
