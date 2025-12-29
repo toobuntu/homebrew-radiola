@@ -1,0 +1,52 @@
+name: Cask CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  HOMEBREW_DEVELOPER: 1
+  HOMEBREW_NO_AUTO_UPDATE: 1
+  HOMEBREW_NO_INSTALL_FROM_API: 1
+
+permissions:
+  contents: read
+
+jobs:
+  cask:
+    runs-on: macos-latest
+
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@main
+        with:
+          core: false
+          cask: false
+
+      # Cache Ruby gems installed by Homebrew developer commands (e.g. brew style)
+      - name: Cache Homebrew Bundler RubyGems
+        id: cache
+        uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
+        with:
+          path: ${{ steps.set-up-homebrew.outputs.gems-path }}
+          key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
+          restore-keys: ${{ runner.os }}-rubygems-
+
+      - name: Install Homebrew Bundler RubyGems
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: brew install-bundler-gems
+
+      - name: Tap toobuntu/radiola
+        run: brew tap toobuntu/radiola
+
+      - name: Style
+        run: brew style --cask toobuntu/radiola
+
+      - name: Syntax
+        run: ruby -c Casks/r/radiola@8.rb
+
+      - name: Audit
+        run: brew audit --cask --strict --online --skip-style --display-filename toobuntu/radiola/radiola@8
