@@ -66,7 +66,7 @@ You can also disable updates manually:
 
 ```sh
 defaults write ~/Library/Preferences/com.github.SokoloffA.Radiola.plist SUEnableAutomaticChecks -bool false
-defaults write ~/Library/Preferences/com.github.SokoloffA.Radiola.plist SUFeedURL -string "https://raw.githubusercontent.com/toobuntu/homebrew-radiola/main/feed.xml"
+defaults write ~/Library/Preferences/com.github.SokoloffA.Radiola.plist SUFeedURL -string "https://raw.githubusercontent.com/toobuntu/homebrew-radiola/main/radiola@8-feed.xml"
 ```
 
 ## Technical notes

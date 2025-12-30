@@ -24,7 +24,7 @@ cask "radiola@8" do
   # Legacy version; disable Sparkle updates
   postflight do
     prefs = File.expand_path("~/Library/Preferences/com.github.SokoloffA.Radiola.plist")
-    feed_url = "https://raw.githubusercontent.com/toobuntu/homebrew-radiola/main/feed.xml"
+    feed_url = "https://raw.githubusercontent.com/toobuntu/homebrew-radiola/main/radiola@8-feed.xml"
 
     ohai "Preparing Radiola 8 to suppress update checks..."
 
