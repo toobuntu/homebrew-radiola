@@ -12,7 +12,7 @@ last checked: 28 Dec 2025
 
 This tap provides Radiola 8.1.1, the final release that used macOS’s built‑in AVPlayer framework for audio playback. Later versions migrated to an FFmpeg‑based engine to support additional codecs (e.g., FLAC) and to improve metadata handling for certain streams.
 
-Radiola 8 remains useful for users whose needs are met by simple MP3/AAC radio streams and who prefer the lower memory usage of the AVPlayer-based engine. This tap exists to make that legacy version easily installable without interfering with the official Radiola cask.
+Radiola 8 remains useful for playing simple MP3/AAC streams using only macOS’ built-in media frameworks. This tap exists to make that legacy version easily installable without interfering with the official Radiola cask.
 
 ## Sparkle Updater Behavior
 

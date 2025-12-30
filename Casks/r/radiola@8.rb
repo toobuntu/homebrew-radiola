@@ -114,6 +114,6 @@ cask "radiola@8" do
     `sokoloffa.github.io` using a firewall or in /etc/hosts.
 
     For details, see:
-      https://github.com/toobuntu/homebrew-radiola/blob/main/NOTES.md
+      https://github.com/toobuntu/homebrew-radiola/blob/main/docs/NOTES.md
   EOS
 end

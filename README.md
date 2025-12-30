@@ -12,15 +12,17 @@ SPDX-License-Identifier: GPL-3.0-or-later
 [![radiola](docs/assets/radiola.png)](https://github.com/SokoloffA/radiola)
 -->
 
-# Radiola Legacy Tap
+# Radiola 8 Legacy Tap
 
-This tap provides the legacy **Radiola 8** release, the final version that used macOS’ built‑in **AVPlayer** audio engine. Newer Radiola versions switched to an FFmpeg-based engine to support more audio formats and address issues with certain streams.
+This tap provides the legacy **Radiola 8** release.
 
-Radiola 8 remains lightweight and efficient—using roughly **2 MiB** of memory compared to **~27 MiB** for the FFmpeg-based engine. If the AVPlayer-based version worked well for your needs, you can install it from this tap. It often performed reliably for simple MP3/AAC radio streams.
+Radiola 8 was the final release that used macOS’ built‑in **AVPlayer** audio engine. 
+Newer Radiola versions switched to an FFmpeg-based engine to support more audio formats and address issues with certain streams, which increased the application’s size and memory usage.
 
-Installing Radiola 8 from this tap also prevents it from auto-updating to the newer audio engine. If you want to follow ongoing upstream development, install Radiola from its official Homebrew cask instead.
+Radiola 8 remains useful for playing simple MP3/AAC streams using only macOS’ built-in media frameworks, with slightly lower runtime memory usage (≈ 12–32 MB v. ≈ 27–40 MB as of December 2025).
 
-You can support the project by starring or watching the upstream repository: https://github.com/SokoloffA/radiola
+Installing Radiola 8 from this tap also prevents it from auto-updating to the newer audio engine. 
+If you want to follow ongoing upstream development, install Radiola from its official Homebrew cask instead.
 
 ## Install
 
@@ -55,10 +57,10 @@ brew uninstall --zap --cask radiola@8
 
 ## Preventing updates
 
-So Radiola 8 does not prompt for newer versions, the cask automatically:
+To ensure Radiola 8 does not prompt for newer versions, the cask automatically:
 
 - disables automatic update checks
-- points Sparkle (in-app updater) to a custom update feed pinned to Radiola 8
+- points Sparkle (the in-app updater) to a custom update feed pinned to Radiola 8
 
 You can also disable updates manually:
 
@@ -76,4 +78,11 @@ See [NOTES.md](docs/NOTES.md) for details on:
 
 ## Acknowledgments
 
-The Radiola logos in this repository (`docs/assets/radiola.png` and `docs/assets/signal.svg`) are copyright Alexander Sokolov, the original author of Radiola, and are available under the MIT license. See the corresponding `.license` files in `docs/assets` for details.
+Radiola was created by Alexander Sokolov. 
+You can support the project by starring or watching the upstream repository: 
+https://github.com/SokoloffA/radiola
+
+## License
+
+[GPL-3.0-or-later](LICENSE) Copyright Todd Schulman
+Third-party assets include their own license information.
