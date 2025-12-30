@@ -85,4 +85,5 @@ https://github.com/SokoloffA/radiola
 ## License
 
 [GPL-3.0-or-later](LICENSE) Copyright Todd Schulman
+
 Third-party assets include their own license information.
